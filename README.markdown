@@ -1,3 +1,7 @@
+# TODO
+- Tries number should be an option
+
+
 # DetachedCarrot
 
 A port of SimplifiedStarling plugin for push&amp;pop active_record tasks to RabbitMQ.
@@ -13,16 +17,22 @@ This plugin works with carrot gem a great client for synchronous amqp. so what m
 
   RabbitMQ: A Erlang Message Queue
 
-  AMQP: amqp gem and
+  AMQP: amqp gem 
  
   Carrot: the amsynchronous amqp client gem
+
+  JSON: Json gem
+
+  Daemons: deamons gem
 
 # Getting Started
 
 ## Install
 
-        sudo gem install amqp
+    sudo gem install amqp
 	sudo gem install famoseagle-carrot
+	sudo gem install json
+	sudo gem install daemons	
 
 
 Install this Rails plugin as usual.
@@ -32,15 +42,6 @@ Install this Rails plugin as usual.
 
 	$  sudo rabbitmq-server
 	
-## Tasks
-
-	rake carrots:start_processing_jobs
-	rake carrots:stop_processing_jobs
-	
-## Stats
-
-		rake carrots:stats
-
 ## Usage
 
 Example 1, Push a +newsletter+ job into +rabbitMQ+.
@@ -51,6 +52,20 @@ Example 2, Confirm an +order+ payment and push into +rabbitMQ+ an stock recalcul
  
 Example 3 , Push a task with options.
 	Repository.push :generate, { :token => token }
+
+## Capistrano
+
+`<code>`
+namespace :carrot do
+  task :start, :roles => :your_server do
+    invoke_command " RAILS_ENV=production #{deploy_to}/current/script/detached_carrot start" , :via => run_method
+  end
+  task :stop, :roles => :your_server do
+    invoke_command " RAILS_ENV=production #{deploy_to}/current/script/detached_carrot stop" , :via => run_method
+  end  
+end
+
+`</code>`
 	
 ## log
 

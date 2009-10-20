@@ -12,7 +12,6 @@ module DetachedCarrot
     end
 
     def listen
-      cambiar_usuario(1)           
       while(!@shutdown) do
         pop
       end        
