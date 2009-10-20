@@ -1,4 +1,5 @@
 require 'erb'
+require 'fileutils'
 
 carrot_config = Dir.getwd + "/config/carrots.yml"
 carrot_config_template = Dir.getwd + "/vendor/plugins/detached-carrot/files/carrots.yml.erb"
@@ -20,3 +21,16 @@ else
   puts "=> carrot configuration file already exists."
 
 end
+
+carrot_initializer = Dir.getwd + "/config/initializers/carrot.rb"
+carrot_initializer_template = Dir.getwd + "/vendor/plugins/detached-carrot/files/carrot.rb"
+
+unless File.exist?(carrot_initializer)
+
+  pwd = Dir.getwd
+  carrot_initializer_file = FileUtils.cp(carrot_initializer_template, carrot_initializer)
+  puts "=> Copied carrot initializer file."
+else
+  puts "=> Carrot initializer file already exists."
+end
+
