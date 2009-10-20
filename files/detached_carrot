@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'daemons'
+
+detached_carrot = File.join(File.dirname(__FILE__), '..', 'vendor', 'plugins', 'detached-carrot', 'script', 'listen.rb')
+options = {
+  :app_name   => "detached_carrot",
+  :ARGV       => ARGV,
+  :dir_mode   => :normal,
+  :dir        => File.join(File.dirname(__FILE__), '..', 'log'),
+  :log_output => true,
+  :multiple   => false,
+  :backtrace  => true,
+  :monitor    => true
+}
+  
+
+Daemons.run(detached_carrot, options)

@@ -34,3 +34,16 @@ else
   puts "=> Carrot initializer file already exists."
 end
 
+carrot_script = Dir.getwd + "/script/detached_carrot"
+carrot_script_template = Dir.getwd + "/vendor/plugins/detached-carrot/files/detached_carrot"
+
+unless File.exist?(carrot_script)
+
+
+  FileUtils.cp(carrot_script_template, carrot_script)
+  FileUtils.chmod 0755, carrot_script
+  puts "=> Copied carrot script file."
+else
+  puts "=> Carrot script file already exists."
+end
+

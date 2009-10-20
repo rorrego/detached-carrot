@@ -1,10 +1,16 @@
 # Uninstall hook code here
 require 'fileutils'
 
-carrot_config = Dir.getwd + "/config/carrots.yml"
-FileUtils.rm(carrot_initializer)
-puts "Borrado #{carrot_config}"
-carrot_initializer = Dir.getwd + "/config/initializers/carrot.rb"
-FileUtils.rm(carrot_initializer)
-puts "Borrado #{carrot_initializer}"
+dir = Dir.getwd
+archivos = {
+    :carrot_config => "#{dir}/config/carrots.yml",
+    :carrot_initializer => "#{dir}/config/carrots.yml",
+    :carrot_script => "#{dir}/config/carrots.yml"
+}
+
+archivos.each_pair {|key, value|
+  FileUtils.rm(value)
+  puts "Borrado #{key}"    
+    }
+
 puts "Ahora rm -rf vendor/plugins/detached-carrot"
