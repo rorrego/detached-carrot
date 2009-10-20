@@ -19,7 +19,7 @@ This plugin works with carrot gem a great client for synchronous amqp. so what m
 
   AMQP: amqp gem 
  
-  Carrot: the amsynchronous amqp client gem
+  Carrot: synchronous amqp client gem
 
   JSON: Json gem
 
@@ -36,7 +36,7 @@ This plugin works with carrot gem a great client for synchronous amqp. so what m
 
 
 Install this Rails plugin as usual.
-	script/plugin install git@github.com:michelson/detached-carrot.git
+	script/plugin install git@github.com:rorrego/detached-carrot.git
 	
 ## Start RabbitMQ
 
@@ -56,14 +56,14 @@ Example 3 , Push a task with options.
 ## Capistrano
 
 
-   namespace :carrot do
-    task :start, :roles => :your_server do
+     namespace :carrot do
+      task :start, :roles => :your_server do
         invoke_command " RAILS_ENV=production #{deploy_to}/current/script/detached_carrot start" , :via => run_method
-    end
-    task :stop, :roles => :your_server do
-      invoke_command " RAILS_ENV=production #{deploy_to}/current/script/detached_carrot stop" , :via => run_method
-    end  
-  end
+      end
+      task :stop, :roles => :your_server do
+        invoke_command " RAILS_ENV=production #{deploy_to}/current/script/detached_carrot stop" , :via => run_method
+      end  
+     end
 
 	
 ## log
