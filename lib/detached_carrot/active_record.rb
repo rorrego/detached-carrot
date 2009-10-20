@@ -5,7 +5,7 @@ module DetachedCarrot
   #
   def push(task, *args)
 
-    ActiveRecord::Base.verify_active_connections! if defined?(ActiveRecord)
+    #ActiveRecord::Base.verify_active_connections! if defined?(ActiveRecord)
 
     job = {}
     job[:type] = (self.kind_of? Class) ? self.to_s : self.class.to_s
@@ -13,13 +13,11 @@ module DetachedCarrot
     job[:task] = task
     job[:options] = args
 
-    CARROT.publish(job.to_json)
-    puts "pushed #{job.to_json}"
-    CARROT_LOG.info "[#{Time.now.to_s(:db)}] Pushed #{job[:task]} on #{job[:type]} #{job[:id]}"
-    puts "[#{Time.now.to_s(:db)}] Pushed #{job[:task]} on #{job[:type]} #{job[:id]}"
+    DetachedCarrot::Server.instance.queue.publish(job.to_json)
+    puts "[D-Carrot] #{Time.now.to_s(:db)} -- Pushed #{job[:task]} on #{job[:type]} #{job[:id]}"
     
   rescue Exception => error
-    CARROT_LOG.error "[#{Time.now.to_s(:db)}] ERROR #{error.message}"
+    puts "[D-Carrot] #{Time.now.to_s(:db)} -- ERROR #{error.message}"
   end
   
 
