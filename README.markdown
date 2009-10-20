@@ -55,17 +55,16 @@ Example 3 , Push a task with options.
 
 ## Capistrano
 
-`<code>`
-namespace :carrot do
-  task :start, :roles => :your_server do
-    invoke_command " RAILS_ENV=production #{deploy_to}/current/script/detached_carrot start" , :via => run_method
-  end
-  task :stop, :roles => :your_server do
-    invoke_command " RAILS_ENV=production #{deploy_to}/current/script/detached_carrot stop" , :via => run_method
-  end  
-end
 
-`</code>`
+   namespace :carrot do
+    task :start, :roles => :your_server do
+        invoke_command " RAILS_ENV=production #{deploy_to}/current/script/detached_carrot start" , :via => run_method
+    end
+    task :stop, :roles => :your_server do
+      invoke_command " RAILS_ENV=production #{deploy_to}/current/script/detached_carrot stop" , :via => run_method
+    end  
+  end
+
 	
 ## log
 
