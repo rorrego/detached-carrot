@@ -9,8 +9,13 @@ archivos = {
 }
 
 archivos.each_pair {|key, value|
-  FileUtils.rm(value)
-  puts "Borrado #{key}"    
+  begin
+    FileUtils.rm(value)
+    puts "Borrado #{key}"    
+  rescue => e
+    puts "No se pudo Borrar #{key} por #{e.message}"        
+
+  end
     }
 
 puts "Ahora rm -rf vendor/plugins/detached-carrot"
