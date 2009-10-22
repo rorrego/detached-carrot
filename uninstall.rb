@@ -4,8 +4,8 @@ require 'fileutils'
 dir = Dir.getwd
 archivos = {
     :carrot_config => "#{dir}/config/carrots.yml",
-    :carrot_initializer => "#{dir}/config/carrots.yml",
-    :carrot_script => "#{dir}/config/carrots.yml"
+    :carrot_initializer => "#{dir}/config/initializers/carrot.rb",
+    :carrot_script => "#{dir}/script/detached_carrot"
 }
 
 archivos.each_pair {|key, value|
