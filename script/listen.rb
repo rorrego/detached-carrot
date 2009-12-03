@@ -3,9 +3,9 @@ puts '=> Loading Rails...'
 require File.dirname(__FILE__) + '/../../../../config/environment'
 
 invoker = DetachedCarrot::Base
-poller = invoker.new()
+poller = invoker.new(:queue => nil)
 puts '** Rails loaded.'
-puts "** Starting #{ invoker }..."
+puts "** Starting #{invoker} for the queue '#{queue}'"
 puts '** Use CTRL-C to stop.'
 
 ActiveRecord::Base.logger = DetachedCarrot::Base.logger

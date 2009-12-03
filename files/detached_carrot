@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'rubygems'
 require 'daemons'
-
+require 'detached_carrot/queues'
 detached_carrot = File.join(File.dirname(__FILE__), '..', 'vendor', 'plugins', 'detached-carrot', 'script', 'listen.rb')
 options = {
   :app_name   => "detached_carrot",
@@ -14,5 +14,6 @@ options = {
   :monitor    => true
 }
   
-
-Daemons.run(detached_carrot, options)
+DetachedCarrot::Queues.instance.queues.each do |q|
+  Daemons.run(detached_carrot, options)
+end

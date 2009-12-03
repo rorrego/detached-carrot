@@ -8,7 +8,7 @@ module DetachedCarrot
     @@logger ||= ::RAILS_DEFAULT_LOGGER
 
     def initialize(options={})
-      @queue = DetachedCarrot::Server.instance.queue
+      @queue = DetachedCarrot::Server.instance.queues(options[:queue])
     end
 
     def listen

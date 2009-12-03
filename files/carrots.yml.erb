@@ -2,7 +2,9 @@ development:
 	host: 127.0.0.1
 	port: 5672
 	log_level: DEBUG
-	queue: development
+	queues: 
+		- development
+		- notificaciones
 test:
 	host: 127.0.0.1
 	port: 5672

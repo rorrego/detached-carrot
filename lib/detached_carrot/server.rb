@@ -5,10 +5,9 @@ module DetachedCarrot
 
     attr_reader :server, :queue
     
-    def initialize()
+    def initialize(opts={})
       @server ||= Carrot.new(:host => CARROTS_CONFIG['host'], :port => CARROTS_CONFIG['port'])
-      @queue ||= @server.queue(CARROTS_CONFIG['queue'])
-      
+      @queue  ||= DetachedCarrot::Queues.instance.assign_queue(:server => @server, :queue => opts[:queue])
     end
     
     def close
