@@ -44,10 +44,11 @@ module DetachedCarrot
         end
         puts "[#{Time.now.to_s(:db)}] Popped #{job['task']} on #{job['type']} #{job['id']}"
       rescue ActiveRecord::RecordNotFound
+        ActiveRecord::Base.connection.reconnect!
         if job['tries'].blank?
           job['tries'] = 0
         end
-        unless job['tries'] > 10
+        unless job['tries'] > 30
           job['tries'] = job['tries'] + 1
           @queue.publish(job.to_json)        
         end
